@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IT Student Information Collection</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 750px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #0b5ed7;
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .notice {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #0b5ed7;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        label span {
+            color: red;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 15px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #0b5ed7;
+            box-shadow: 0 0 0 3px rgba(11,94,215,0.1);
+        }
+
+        .date-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            background: #0b5ed7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #084298;
+        }
+
+        .submit-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .message {
+            display: none;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 7px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            color: #0b5ed7;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #6b7280;
+            background: #f9fafb;
+        }
+
+        @media(max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                margin: 10px auto;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .date-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>IT Student Information Collection</h1>
+
+        <p>
+            Only students currently undertaking IT/SIWES should complete this form.
+        </p>
+
+    </div>
+
+
+    <div class="form-container">
+
+        <div class="notice">
+
+            <strong>Important Information</strong><br>
+
+            Please provide accurate information.
+
+            Your bank account must be a traditional bank account.
+
+            Opay, PalmPay, Kuda and Moniepoint accounts are not accepted.
+
+            If you do not know your bank's sort/branch code, please contact your bank branch.
+
+        </div>
+
+
+        <form id="studentForm">
+
+
+            <h3 class="section-title">
+                Student Information
+            </h3>
+
+
+            <div class="form-group">
+
+                <label>
+                    Name of Student <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Matriculation Number <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="matric"
+                    placeholder="Enter your matric number"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Course of Study <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="course"
+                    placeholder="e.g. Computer Engineering"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Level of Study <span>*</span>
+                </label>
+
+                <select id="level" required>
+
+                    <option value="">
+                        Select Level
+                    </option>
+
+                    <option>100 Level</option>
+                    <option>200 Level</option>
+                    <option>300 Level</option>
+                    <option>400 Level</option>
+                    <option>500 Level</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Student Email <span>*</span>
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@gmail.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Year of Study <span>*</span>
+                </label>
+
+                <select id="year" required>
+
+                    <option value="">
+                        Select Year
+                    </option>
+
+                    <option>1st Year</option>
+                    <option>2nd Year</option>
+                    <option>3rd Year</option>
+                    <option>4th Year</option>
+                    <option>5th Year</option>
+
+                </select>
+
+            </div>
+
+
+            <h3 class="section-title">
+                IT Attachment Information
+            </h3>
+
+
+            <div class="date-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Attachment From <span>*</span>
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fromDate"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Attachment To <span>*</span>
+                    </label>
+
+                    <input
+                        type="date"
+                        id="toDate"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Nationality <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="nationality"
+                    value="Nigerian"
+                    required
+                >
+
+            </div>
+
+
+            <h3 class="section-title">
+                Bank Information
+            </h3>
+
+
+            <div class="form-group">
+
+                <label>
+                    Bank Name <span>*</span>
+                </label>
+
+                <select id="bank" required>
+
+                    <option value="">
+                        Select your bank
+                    </option>
+
+                    <option>Access Bank</option>
+                    <option>Citibank Nigeria</option>
+                    <option>Ecobank Nigeria</option>
+                    <option>Fidelity Bank</option>
+                    <option>First Bank of Nigeria</option>
+                    <option>FCMB</option>
+                    <option>Globus Bank</option>
+                    <option>GTBank</option>
+                    <option>Keystone Bank</option>
+                    <option>Lotus Bank</option>
+                    <option>Polaris Bank</option>
+                    <option>Premium Trust Bank</option>
+                    <option>Providus Bank</option>
+                    <option>Stanbic IBTC Bank</option>
+                    <option>Standard Chartered Bank</option>
+                    <option>Sterling Bank</option>
+                    <option>SunTrust Bank</option>
+                    <option>UBA</option>
+                    <option>Union Bank</option>
+                    <option>Unity Bank</option>
+                    <option>Wema Bank</option>
+                    <option>Zenith Bank</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Account Number <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="accountNumber"
+                    maxlength="10"
+                    inputmode="numeric"
+                    placeholder="Enter 10-digit account number"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Sort Code / Branch Code <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="sortCode"
+                    inputmode="numeric"
+                    placeholder="Enter your bank branch/sort code"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Student Phone Number <span>*</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="08012345678"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+            >
+                Submit Information
+            </button>
+
+
+            <div
+                class="loading"
+                id="loading"
+            >
+                Submitting your information. Please wait...
+            </div>
+
+
+            <div
+                class="message"
+                id="message"
+            ></div>
+
+
+        </form>
+
+    </div>
+
+
+    <div class="footer">
+
+        IT/SIWES Student Information Collection Portal
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+    IMPORTANT:
+
+    Replace the URL below with your
+    Google Apps Script Web App URL.
+    */
+
+    const GOOGLE_SCRIPT_URL =
+    "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+
+    const form =
+    document.getElementById("studentForm");
+
+    const submitBtn =
+    document.getElementById("submitBtn");
+
+    const loading =
+    document.getElementById("loading");
+
+    const message =
+    document.getElementById("message");
+
+
+    form.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            message.style.display =
+            "none";
+
+
+            const bank =
+            document.getElementById("bank").value;
+
+
+            const accountNumber =
+            document.getElementById("accountNumber")
+            .value.trim();
+
+
+            const sortCode =
+            document.getElementById("sortCode")
+            .value.trim();
+
+
+            const fromDate =
+            document.getElementById("fromDate")
+            .value;
+
+
+            const toDate =
+            document.getElementById("toDate")
+            .value;
+
+
+            /*
+            Validate account number
+            */
+
+            if (
+                !/^\d{10}$/.test(accountNumber)
+            ) {
+
+                showError(
+                    "Account number must contain exactly 10 digits."
+                );
+
+                return;
+
+            }
+
+
+            /*
+            Validate dates
+            */
+
+            if (
+                new Date(fromDate) >
+                new Date(toDate)
+            ) {
+
+                showError(
+                    "Attachment start date cannot be after the end date."
+                );
+
+                return;
+
+            }
+
+
+            /*
+            Collect form data
+            */
+
+            const data = {
+
+                name:
+                document.getElementById("name").value.trim(),
+
+                matric:
+                document.getElementById("matric").value.trim(),
+
+                course:
+                document.getElementById("course").value.trim(),
+
+                level:
+                document.getElementById("level").value,
+
+                email:
+                document.getElementById("email").value.trim(),
+
+                year:
+                document.getElementById("year").value,
+
+                fromDate:
+                fromDate,
+
+                toDate:
+                toDate,
+
+                nationality:
+                document.getElementById("nationality").value.trim(),
+
+                bank:
+                bank,
+
+                accountNumber:
+                accountNumber,
+
+                sortCode:
+                sortCode,
+
+                phone:
+                document.getElementById("phone").value.trim()
+
+            };
+
+
+            /*
+            Disable button
+            */
+
+            submitBtn.disabled =
+            true;
+
+            submitBtn.innerText =
+            "Submitting...";
+
+            loading.style.display =
+            "block";
+
+
+            try {
+
+                const response =
+                await fetch(
+                    GOOGLE_SCRIPT_URL,
+                    {
+
+                        method: "POST",
+
+                        mode: "no-cors",
+
+                        headers: {
+                            "Content-Type":
+                            "text/plain;charset=utf-8"
+                        },
+
+                        body:
+                        JSON.stringify(data)
+
+                    }
+                );
+
+
+                /*
+                Because no-cors is used,
+                the browser cannot read the response.
+
+                We assume the request was sent.
+                */
+
+                showSuccess(
+                    "Your information has been submitted successfully."
+                );
+
+
+                form.reset();
+
+
+            } catch (error) {
+
+                showError(
+                    "Unable to submit your information. Please try again."
+                );
+
+            }
+
+
+            submitBtn.disabled =
+            false;
+
+            submitBtn.innerText =
+            "Submit Information";
+
+            loading.style.display =
+            "none";
+
+        }
+    );
+
+
+    function showSuccess(text) {
+
+        message.className =
+        "message success";
+
+        message.innerHTML =
+        "✓ " + text;
+
+        message.style.display =
+        "block";
+
+    }
+
+
+    function showError(text) {
+
+        message.className =
+        "message error";
+
+        message.innerHTML =
+        "⚠ " + text;
+
+        message.style.display =
+        "block";
+
+    }
+
+</script>
+
+</body>
+</html>
